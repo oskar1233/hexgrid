@@ -9,7 +9,8 @@ RUN go mod download
 
 COPY package.json package-lock.json .
 
-COPY *.go *.templ static input.css .
+COPY *.go *.templ input.css .
+COPY static/ static/
 RUN templ generate
 RUN npx tailwindcss -i ./input.css -o ./static/style.css
 RUN CGO_ENABLED=0 GOOS=linux go build -o /hexgrid
