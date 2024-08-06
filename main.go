@@ -127,7 +127,7 @@ func main() {
 
 	engine := nbhttp.NewEngine(nbhttp.Config{
 		Network:                 "tcp",
-		Addrs:                   []string{"localhost:8080"},
+		Addrs:                   []string{"0.0.0.0:8080"},
 		MaxLoad:                 1_000_000,
 		ReleaseWebsocketPayload: true,
 		Handler:                 mux,
