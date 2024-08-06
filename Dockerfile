@@ -8,12 +8,12 @@ COPY go.mod go.sum .
 RUN go mod download
 
 COPY package.json package-lock.json .
+RUN npm install
 
 COPY *.go *.templ input.css tailwind.config.js .
 COPY static/ static/
+RUN npm run tailwindcss -i ./input.css -o ./static/style.css
 RUN templ generate
-RUN npm install
-RUN npx tailwindcss -i ./input.css -o ./static/style.css
 RUN CGO_ENABLED=0 GOOS=linux go build -o /hexgrid
 
 EXPOSE 8080
