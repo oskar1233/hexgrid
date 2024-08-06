@@ -1,6 +1,6 @@
 const tilesContainer = document.getElementById("tiles-container")
 
-const websocket = new WebSocket("ws://hexgrid.oskar1233.dev/ws")
+const websocket = new WebSocket("wss://hexgrid.oskar1233.dev/ws")
 
 let color = null
 let width = 0
