@@ -1,0 +1,25 @@
+package main
+
+templ indexComponent() {
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+		</head>
+		<body>
+			<div class="flex justify-center">
+				// width = 16*50
+				<div id="tiles-container" class="flex flex-wrap w-[800px]" click="">
+				</div>
+			</div>
+
+      <div class="mt-5 flex justify-center gap-3">
+        <div>Your color:</div>
+        <div id="your-color" class="w-[24px] h-[24px]">
+        </div>
+      </div>
+
+      <script src="/static/app.js"/>
+		</body>
+	</html>
+}

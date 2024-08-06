@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  #tiles-container div {
+    @apply w-[16px] h-[16px] bg-[red] border;
+  }
+}

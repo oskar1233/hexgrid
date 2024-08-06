@@ -1,0 +1,5 @@
+*_templ.go
+/node_modules
+build-errors.log
+/static/style.css
+/tmp
