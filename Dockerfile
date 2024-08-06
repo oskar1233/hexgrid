@@ -9,7 +9,7 @@ RUN go mod download
 
 COPY package.json package-lock.json .
 
-COPY *.go *.templ input.css .
+COPY *.go *.templ input.css tailwind.config.js .
 COPY static/ static/
 RUN templ generate
 RUN npx tailwindcss -i ./input.css -o ./static/style.css
