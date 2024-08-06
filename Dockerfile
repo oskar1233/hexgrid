@@ -12,6 +12,7 @@ COPY package.json package-lock.json .
 COPY *.go *.templ input.css tailwind.config.js .
 COPY static/ static/
 RUN templ generate
+RUN npm install
 RUN npx tailwindcss -i ./input.css -o ./static/style.css
 RUN CGO_ENABLED=0 GOOS=linux go build -o /hexgrid
 
