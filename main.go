@@ -28,6 +28,8 @@ type color struct {
 const gridWidth = 50
 const gridHeight = 50
 
+const gridFile = "/data/grid"
+
 var grid [gridWidth * gridHeight]color
 
 type Session struct {
@@ -81,6 +83,9 @@ func newUpgrader() *websocket.Upgrader {
 			session := c.Session().(Session)
 
 			grid[offset] = session.color
+
+      // TODO buffer
+      saveGridToFile()
 		} else if data[0] == 3 {
 			// command 3 -> fetch whole grid
 
@@ -119,6 +124,8 @@ func onIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+  readGridFromFile()
+
 	mux := &http.ServeMux{}
 
 	mux.Handle("/", templ.Handler(indexComponent()))
@@ -165,4 +172,36 @@ func writeColorToBinary(w io.Writer, order binary.ByteOrder, color color) error 
 	}
   
   return nil
+}
+
+func readGridFromFile() {
+  bytes, err := os.ReadFile(gridFile)
+  if err != nil {
+    log.Println("Couldn't read grid file", err)
+    return
+  }
+
+  for i := range min(gridWidth*gridHeight, len(bytes)) {
+    grid[i].r = bytes[i*3]
+    grid[i].g = bytes[i*3+1]
+    grid[i].b = bytes[i*3+2]
+  }
+}
+
+func saveGridToFile() {
+  f, err := os.Create(gridFile)
+  if err != nil {
+    log.Println("Couldn't create grid file", err)
+    return
+  }
+  defer f.Close()
+
+  var bytes [gridWidth*gridHeight*3]byte
+  for i := range(gridWidth*gridHeight) {
+    bytes[i*3] = grid[i].r
+    bytes[i*3+1] = grid[i].g
+    bytes[i*3+2] = grid[i].b
+  }
+
+  f.Write(bytes[:])
 }
