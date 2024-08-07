@@ -14,8 +14,8 @@ COPY *.go *.templ input.css tailwind.config.js .
 COPY static/ static/
 RUN npx tailwindcss -i ./input.css -o ./static/style.css
 RUN templ generate
-RUN CGO_ENABLED=0 GOOS=linux go build -o ./hexgrid
+RUN CGO_ENABLED=0 GOOS=linux go build -o ./squaregrid
 
 EXPOSE 8080
 
-CMD ["/app/hexgrid"]
+CMD ["/app/squaregrid"]

@@ -1,4 +1,4 @@
-module github.com/oskar1233/hexgrid
+module github.com/oskar1233/squaregrid
 
 go 1.22.5
 
